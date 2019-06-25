@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trip</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <style>
+     .right_wrap{
+       margin-left: 1200px;
+       align-text: right
+     }
+   </style>
+  </head>
+  <body>
+    <div class= "right_wrap">
+    <a href ="/dashboard">Home</a>  &nbsp;| &nbsp;  <a href ="/logout">Logout</a></div>
+    <div class = "container">
+      <h2>Add a Trip</h2>
+    <form action="/addTrip" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+    <label for="name">Destination</label>
+        {% if messages %}
+                {% for message in messages %}
+                    {%if "destination" in message.tags%}
+                    <p{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</p>
+                  {%endif%}
+                {% endfor %}
+        {% endif %}
+        <!--Use this section of code (24-30) to implement tags in your html for each error -->
+        <input type="text" class="form-control" id="destination" name="destination" placeholder="Please enter a destination.">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Description</label>
+        {% if messages %}
+                {% for message in messages %}
+                    {%if "plan" in message.tags%}
+                    <p{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</p>
+                  {%endif%}
+                {% endfor %}
+        {% endif %}
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="plan" placeholder="Please enter a plan for your destination.">
+      </div>
+      <div class="form-group">
+        <label for="dob">Start Date</label>
+        {% if messages %}
+                {% for message in messages %}
+                    {%if "start_date" in message.tags%}
+                    <p{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</p>
+                  {%endif%}
+                {% endfor %}
+        {% endif %}
+        <input type="date" class="form-control" id="start_date" name="start_date" placeholder="Please enter your trip start date.">
+        <small id="emailHelp" class="form-text text-muted">Start date must be future dated.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">End Date</label>
+        {% if messages %}
+                {% for message in messages %}
+                    {%if "end_date" in message.tags%}
+                    <p{% if message.tags %} class="{{ message.tags }} error"{% endif %}>{{ message }}</p>
+                  {%endif%}
+                {% endfor %}
+        {% endif %}
+      <input type="date" class="form-control" id="exampleInputPassword1" name="end_date" placeholder="Please enter an end date for your trip.">
+        <small id="emailHelp" class="form-text text-muted">End date must be later than your start date.</small>
+      </div>
+        <button type="submit" class="btn btn-dark">Add Trip</button>
+    </form>
+    </div>
+  </body>
+</html>
